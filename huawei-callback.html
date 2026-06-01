@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Huawei Health authorization</title>
+    <style>
+      body {
+        font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+        background: #0d1529;
+        color: #eef2ff;
+        display: flex;
+        min-height: 100vh;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        padding: 24px;
+      }
+      .card {
+        max-width: 560px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 32px;
+      }
+      h1 { font-size: 1.4rem; margin: 0 0 12px; }
+      p { color: #cbd5ff; line-height: 1.5; }
+      code {
+        display: block;
+        word-break: break-all;
+        background: rgba(0, 0, 0, 0.35);
+        padding: 12px;
+        border-radius: 10px;
+        font-size: 0.85rem;
+        margin: 16px 0;
+      }
+      button {
+        background: linear-gradient(135deg, #6366f1, #4f46e5);
+        color: #fff;
+        border: none;
+        border-radius: 12px;
+        padding: 12px 18px;
+        font: inherit;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .ok { color: #34d399; margin-left: 10px; }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h1>✅ Huawei Health authorization received</h1>
+      <p>Copy the full URL below and paste it back into your dashboard's
+        "Connect Huawei Health" box to finish linking your account.</p>
+      <code id="url"></code>
+      <button id="copy">Copy URL</button>
+      <span id="status" class="ok"></span>
+    </div>
+    <script>
+      const url = window.location.href;
+      document.getElementById("url").textContent = url;
+      document.getElementById("copy").addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(url);
+          document.getElementById("status").textContent = "Copied!";
+        } catch {
+          document.getElementById("status").textContent = "Select the text above and copy manually.";
+        }
+      });
+    </script>
+  </body>
+</html>
